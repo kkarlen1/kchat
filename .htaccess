@@ -1,3 +1,31 @@
+# Запрещаем показ списка файлов
+Options -Indexes
+
 <IfModule mod_headers.c>
     Header set Access-Control-Allow-Origin "*"
 </IfModule>
+
+RewriteEngine On
+
+RewriteRule ^$ /site/index.php [L]
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Статика
+RewriteRule ^images/(.*)$ /site/src/images/$1 [L]
+RewriteRule ^css/(.*)$ /site/src/css/$1 [L]
+RewriteRule ^scripts/(.*)$ /site/src/scripts/$1 [L]
+RewriteRule ^fonts/(.*)$ /site/src/fonts/$1 [L]
+
+# Общие ресурсы
+RewriteRule ^shared/(.*)$ /shared/$1 [L]
+
+# favicon
+RewriteRule ^favicon\.ico$ /site/src/images/favicon.ico [L]
+
+# Админка
+RewriteRule ^admin(/.*)?$ /admin/index.php [L]
+
+RewriteRule ^(.*)$ /site/index.php [L]

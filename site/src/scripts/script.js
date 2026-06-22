@@ -51,13 +51,15 @@ $(() =>
 
 		renderMessages()
 		{
-			console.log(messages);
 			const our_messages = messages
 				.filter(value =>
-				value.sender_id === currentUser.id && value.recipient_id === this.id
-				||
-				value.sender_id === this.id && value.recipient_id === currentUser.id
-			).sort((a, b) => a.time - b.time);
+					currentUser.match(value.sender_id) &&
+					this.match(value.recipient_id)
+					||
+					this.match(value.sender_id) &&
+					currentUser.match(value.recipient_id)
+				)
+				.sort((a, b) => a.time - b.time);
 
 			const messages_element = $('div.messages');
 			messages_element.html('');
@@ -69,6 +71,8 @@ $(() =>
 				));
 			}
 		}
+
+		match(id) { return this.id === id; }
 	}
 
 	const MY_ID = 999;
