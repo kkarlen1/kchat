@@ -1,0 +1,82 @@
+html, body {
+	margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden;
+	font-family: "JetBrains Mono", sans-serif; font-weight: 400;
+}
+
+body > div {
+	display: grid; height: 100%;
+	grid-template-columns: 200px auto;
+}
+
+body > div > div.left {
+	border-right: 1px solid #bfbfbf; overflow: hidden;
+}
+
+body > div > div.left > div.search {
+	height: 39px;
+	border-bottom: 1px solid #bfbfbf;
+}
+
+body > div > div.left > div.userlist {
+	display: flex; flex-direction: column; gap: 8px;
+	max-height: calc(100% - 39px); overflow: auto;
+}
+
+body > div > div.left > div.userlist > div {
+	padding: 4px 8px; cursor: pointer;
+	display: flex; gap: 6px; align-items: center;
+}
+
+body > div > div.left > div.userlist > div.act {
+	background-color: lightgrey;
+}
+
+body > div > div.left > div.userlist > div > img {
+	border-radius: 50%;
+}
+
+body > div > div.right {
+	display: grid; overflow: hidden;
+	grid-template-rows: 40px auto 160px;
+}
+
+body > div > div.right > div.info {
+	padding: 12px 6px;
+	border-bottom: 1px solid #bfbfbf;
+	display: flex; flex-direction: column;
+}
+
+body > div > div.right > div.messages {
+	padding: 12px 6px;
+	border-bottom: 1px solid #bfbfbf;
+	display: flex; flex-direction: column; overflow: auto;
+}
+
+body > div > div.right > div.messages > div {
+	background-color: lightblue; color: #000e12;
+	margin-bottom: 18px; padding: 8px 16px; display: inline-block;
+}
+
+body > div > div.right > div.messages > div > span {
+	font-size: 10px; font-weight: 600;
+}
+
+body > div > div.right > div.messages > div.my {
+	align-self: end;
+}
+body > div > div.right > div.messages > div.your {
+	align-self: start;
+}
+
+body > div > div.right > div.textfield {
+	display: grid; grid-template-columns: 1fr 150px; gap: 4px;
+}
+
+body > div > div.right > div.textfield > div:first-child > textarea {
+	width: calc(100% - 6px); height: calc(100% - 6px);
+	font-size: 16px; resize: none;
+}
+
+body > div > div.right > div.textfield > div:last-child > button {
+	width: 100%; height: 100%;
+}
