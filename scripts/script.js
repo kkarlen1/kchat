@@ -71,23 +71,33 @@ $(() =>
 		}
 	}
 
-	const MY_ID = 999;
-	const currentUser = new User(MY_ID, 'Pupochek', 'images/pes.jpg')
+	const MY_ID = 1;
+	const currentUser = null;
+
+	$.ajax({
+		url: '/getUser.php?id=' + MY_ID,
+		method: 'GET',
+		dataType: 'json',
+		success: (response) =>
+		{
+			console.log(response);
+		}
+	});
 
 	const textarea = $('div.textfield > div > textarea');
 	const button = $('div.textfield > div > button');
 	const messageContainer = $('div.right > div.messages');
 
-	function getCurrentDate()
+	function getStringDate()
 	{
-		const now = new Date();
+		const date = new Date();
 
-		const day = String(now.getDate()).padStart(2, '0');
-		const month = String(now.getMonth() + 1).padStart(2, '0');
-		const year = now.getFullYear();
-		const hours = String(now.getHours()).padStart(2, '0');
-		const minutes = String(now.getMinutes()).padStart(2, '0');
-		const seconds = String(now.getSeconds()).padStart(2, '0');
+		const day = String(date.getDate()).padStart(2, '0');
+		const month = String(date.getMonth() + 1).padStart(2, '0');
+		const year = date.getFullYear();
+		const hours = String(date.getHours()).padStart(2, '0');
+		const minutes = String(date.getMinutes()).padStart(2, '0');
+		const seconds = String(date.getSeconds()).padStart(2, '0');
 
 		return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
 	}
@@ -95,7 +105,7 @@ $(() =>
 	button.on('click', () =>
 	{
 		const messageBody = textarea.val();
-		const date = getCurrentDate();
+		const date = getStringDate();
 		messages.push({
 			body: messageBody,
 			sender_id: currentUser.id,
@@ -112,33 +122,6 @@ $(() =>
 			)
 		);
 	});
-
-	const messages = [
-		{
-			body: 'Саламу алейкум, брат',
-			sender_id: currentUser.id,
-			recipient_id: 1,
-			time: 12,
-		},
-		{
-			body: 'Привет',
-			sender_id: 1,
-			recipient_id: currentUser.id,
-			time: 10,
-		},
-		{
-			body: 'займи 5к, умоляю...',
-			sender_id: 35,
-			recipient_id: currentUser.id,
-			time: 75,
-		},
-		{
-			body: 'Прикинь че узнал про настюху...',
-			sender_id: 14,
-			recipient_id: 115,
-			time: 13,
-		}
-	];
 
 	const users = [
 		new User(1, 'petux1', 'images/pes.jpg'),
